@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use App\Models\PostMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth')->only(['show', 'display', 'create', 'edit', 'update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -53,16 +59,22 @@ class BlogPostController extends Controller
     {
         $request->validated();
 
-        $user = Auth::user();
 
-
-        Post::create([
+        $post = Post::create([
+                'user_id' => Auth::user()->id,
                 'title' => $request->title,
                 'subtitle' => $request->subtitle,
                 'body' => $request->body,
                 'min_to_read' => $request->min_to_read,
-                'user_id' => $user->id
             ]);
+
+        $post->meta()->create([
+            'post_id' => $post->id, 
+            'meta_description' =>  $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_robots' => $request->meta_robots
+        ]);
+        
 
         return redirect(route('post.display'));
     }

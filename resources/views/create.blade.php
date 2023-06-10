@@ -38,6 +38,15 @@
                 <label for=""> Minutes To Read </label>
                 <input type="number" min="1" name="min_to_read">
             </div>
+
+
+
+            <input type="text" name="meta_description" placeholder="Meta Description...">
+
+            <input type="text" name="meta_keywords" placeholder="Meta Keywords...">
+
+            <input type="text" name="meta_robots" placeholder="Meta Robots...">
+            
             
             <div>
                 <button type="submit"> Create </button>

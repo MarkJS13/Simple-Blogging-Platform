@@ -21,11 +21,11 @@
 
     <div class="dashboard">
 
-
+        
         <section class="post-tiles">
             <ul>
                 @foreach ($posts as $post)
-
+                
                 <li>
                     <span class="title-span"> {{ $post->title }} </span>
                     <span class="date-span">{{ $post->created_at }} </span>

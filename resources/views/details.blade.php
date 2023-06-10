@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="{{ $post->meta->meta_description ? $post->meta->meta_description : '' }}"
+    >
+    <meta
+        name="keywords"
+        content="{{ $post->meta->meta_keywords ? $post->meta->meta_keywords : '' }}"
+    >
+    <meta
+        name="robot"
+        content="{{ $post->meta->meta_robots ? $post->meta->meta_robots : '' }}"
+    > 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -43,8 +56,13 @@
                     {{ $post->body }}
                 </p>
 
-         
-
+                
+                <p>
+                    Categories:
+                    @foreach ($post->categories as $category)
+                        {{ $category->title }}
+                    @endforeach
+                </p>
         </div>
 
         <div class="back">

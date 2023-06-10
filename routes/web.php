@@ -19,7 +19,7 @@ use App\Http\Controllers\BlogPostController;
 
 Route::get('/', [BlogPostController::class, 'welcome'])->name('welcome');
 
-Route::get('/dashboard', [BlogPostController::class, 'display'])->middleware(['auth', 'verified'])->name('post.display');
+Route::get('/dashboard', [BlogPostController::class, 'display'])->name('post.display');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,12 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//Route::get('post/home', [BlogPostController::class, 'display'])->name('post.display');
-
-
 Route::resource('post', BlogPostController::class);
 Route::patch('post/{id}', [BlogPostController::class, 'update'])->name('post.update');
-
-
 
 require __DIR__.'/auth.php';

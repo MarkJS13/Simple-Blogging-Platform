@@ -10,9 +10,19 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'posts';
+    protected $fillable = ['user_id', 'title', 'subtitle', 'body', 'min_to_read'];
 
-    protected $fillable = ['title', 'subtitle', 'body', 'min_to_read', 'user_id'];
 
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
 
+    public function meta() {
+        return $this->hasOne(PostMeta::class);
+    }
+
+    public function categories() {
+        return $this->belongsToMany(Category::class);
+    }
 
 }
